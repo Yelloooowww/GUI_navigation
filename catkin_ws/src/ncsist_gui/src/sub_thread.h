@@ -21,14 +21,14 @@ using namespace std;
 using namespace ros;
 using namespace cv;
 
-class Mainwindow;
+class MainWindow;
 
 class sub_thread : public QThread
 {
   Q_OBJECT
 
 public:
-  sub_thread(QObject *parent, NodeHandle *nh, Mainwindow *gui,string topic_name, int id);
+  sub_thread(QObject *parent, NodeHandle *nh, MainWindow *gui,string topic_name, int id);
   void run();
 
   void cb_image(const sensor_msgs::ImageConstPtr &msg );
@@ -40,7 +40,7 @@ public:
 private:
   NodeHandle *nh;
   // Publisher pub = nh.advertise<std_msgs::String>("pixel_position", 1000);
-  Mainwindow *gui;
+  MainWindow *gui;
   string topic_name;
   QImage *img;
   image_transport::ImageTransport *it;

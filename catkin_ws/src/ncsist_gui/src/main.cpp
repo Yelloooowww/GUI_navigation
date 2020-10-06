@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 {
   ros::init(argc,argv,"test_gui");
   QApplication app(argc, argv);
-  Mainwindow gui(nullptr);
+  MainWindow gui(nullptr);
   gui.show();
   int stat = app.exec();
 

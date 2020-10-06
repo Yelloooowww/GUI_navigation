@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<launch>
-    <node pkg="test" type="nctu_gui" name="test" output="screen" />
-    <node pkg="test" type="py_server.py" name="py_server" output="screen" />
-</launch>
-
-
-<!-- roslaunch realsense2_camera rs_camera.launch align_depth:=true -->

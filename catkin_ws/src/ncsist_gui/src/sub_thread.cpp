@@ -2,7 +2,7 @@
 #include "mainwindow.h"
 
 
-sub_thread::sub_thread(QObject *parent, NodeHandle *nh, Mainwindow *gui, string topic_name, int id):
+sub_thread::sub_thread(QObject *parent, NodeHandle *nh, MainWindow *gui, string topic_name, int id):
   QThread(parent)
 {
   this->nh = nh;
