@@ -19,6 +19,7 @@ from subt_msgs.msg import ArtifactPoseArray
 from subt_msgs.msg import ArtifactPose
 from std_msgs.msg import String
 from std_msgs.msg import Int16MultiArray
+from std_msgs.msg import Int64MultiArray
 
 class GUI_server():
 	def __init__(self):
@@ -45,6 +46,7 @@ class GUI_server():
 		# Publisher & Subscriber
 		self.pub_artifact_pose = rospy.Publisher("artifact_pose", ArtifactPoseArray, queue_size = 1)
 		rospy.Subscriber("ui_position", Int16MultiArray, self.ui_position_callback)
+		rospy.Subscriber("/box_pred/box_coords", Int64MultiArray, self.bbox_callback)
 		rospy.Subscriber('deal_with_goBack', String, self.cb_deal_with_goBack, queue_size=1)
 
 
@@ -70,10 +72,7 @@ class GUI_server():
 	def cb_deal_with_goBack(self, msg):
 		if msg.data=="auto_move_back":
 			rospy.loginfo("auto_move_back!!!!!!")
-			self.obj_pose.pose.position.x=0
-			self.obj_pose.pose.position.y=0
-			self.obj_pose.pose.position.z=0
-			# self.obj_pose.pose = self.start_point.pose
+			self.obj_pose.pose = self.start_point.pose
 			self.obj_pose_arr.pose_array=[]
 			self.obj_pose_arr.pose_array.append(self.obj_pose)
 			self.pub_artifact_pose.publish(self.obj_pose_arr)
@@ -95,6 +94,8 @@ class GUI_server():
 
 
 	def ui_position_callback(self,msg):
+		print(msg)
+		# rospy.loginfo("ui_position_callback")
 		self.gui_x= msg.data[0]
 		self.gui_y= msg.data[1]
 		rospy.logwarn("I heard gui_x=%s  gui_y=%s", msg.data[0],msg.data[1])
@@ -102,8 +103,19 @@ class GUI_server():
 		rospy.logwarn("pub_artifact_pose")
 		return
 
+	def bbox_callback(self,msg):
+		# print(msg.data)
+		if len(msg.data)==4:
+			# rospy.loginfo("bbox_callback")
+			self.gui_x= (msg.data[0]+msg.data[2])/2
+			self.gui_y= (msg.data[1]+msg.data[3])/2
+			rospy.logwarn("I heard bbox_center_x=%s  bbox_center_y=%s", self.gui_x,self.gui_y)
+			self.pub_artifact_pose.publish(self.obj_pose_arr)
+			rospy.logwarn("pub_artifact_pose")
+		return	
+
 	def img_cb(self, rgb_msg, depth_msg):
-		# rospy.loginfo("img_cb")
+		rospy.loginfo("img_cb")
 
 		cv_image = self.cv_bridge.imgmsg_to_cv2(rgb_msg, "bgr8")
 		cv_depth = self.cv_bridge.imgmsg_to_cv2(depth_msg, "16UC1")
@@ -118,12 +130,12 @@ class GUI_server():
 		dum_posestamp.pose.position.z = rz
 		dum_posestamp.header = rgb_msg.header
 		dum_posestamp.header.frame_id = "camera_middle_link"
-		# try:
-		# 	dum_posestamp = self.listener.transformPose("map", dum_posestamp)
-		# except (tf.Exception, tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
-		# 	rospy.loginfo("faile to catch tf %s 2 %s" %
-		# 		("map", rgb_msg.header.frame_id))
-		# 	return
+		try:
+			dum_posestamp = self.listener.transformPose("map", dum_posestamp)
+		except (tf.Exception, tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
+			rospy.loginfo("faile to catch tf %s 2 %s" %
+				("map", rgb_msg.header.frame_id))
+			return
 
 		self.obj_pose.pose = dum_posestamp.pose
 
@@ -154,5 +166,4 @@ class GUI_server():
 if __name__ == '__main__':
 	rospy.init_node('ui_server_node',anonymous=False)
 	duckie_detection = GUI_server()
-	rospy.loginfo("start py_server")
 	rospy.spin()

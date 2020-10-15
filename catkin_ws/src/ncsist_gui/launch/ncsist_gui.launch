@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<launch>
+    <arg name="veh" doc="please specify veh"/>
+    <arg name="config_file" default="grid_map_info"/>
+    <arg name="robot_frame" default="base_link"/>
+    <arg name="map_frame" default="map"/>
+
+    <group ns="$(arg veh)">
+        <node pkg="ncsist_gui" type="ncsist_gui" name="ncsist_gui" output="screen">
+            <remap from="/camera/color/image_raw" to="camera_middle/color/image_raw"/>
+            <remap from="artifact_pose" to="artifact_pose"/>
+            <remap from="cmd_vel" to="joy_teleop/cmd_vel" />
+        </node>
+    </group>
+</launch>

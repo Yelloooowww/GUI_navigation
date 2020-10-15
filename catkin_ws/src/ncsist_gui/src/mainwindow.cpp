@@ -24,7 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
   }
 
   // thread of Subscriber
-  sub_cam = new sub_thread(parent, nh, this, "/camera/color/image_raw", 0);
+  // sub_cam = new sub_thread(parent, nh, this, "/camera/color/image_raw", 0);
+  sub_cam = new sub_thread(parent, nh, this, "/box_pred/img", 0);
   sub_cam->start();
   sub_arti = new sub_artimap(parent, nh, this, "artifact_pose", 0);
   sub_arti->start();

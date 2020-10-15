@@ -1,19 +1,24 @@
-# GUI_navigation
+# Husky A* navigation with GUI
 
-### shell A (for camera)
-`$ roslaunch realsense2_camera rs_camera.launch align_depth:=true`
+## Launch GUI on laptop
+`laptop $ git clone https://github.com/Yelloooowww/GUI_navigation.git`
 
-or
+`laptop $ cd ~/GUI_navigation/catkin_ws/`
 
-`$ roslaunch realsense2_camera rs_aligned_depth.launch `
+`laptop $ catkin_make`
+
+`laptop $ source ~/GUI_navigation/catkin_ws/devel/setup.bash`
+
+`laptop $ export ROS_MASTER_URI=http://192.168.1.11:11311`
+
+`laptop $ export ROS_IP=192.168.1.101`
+
+`laptop $ roslaunch ncsist_gui ncsist_gui.launch veh:=husky1`
 
 
+## Launch Rviz on laptop
+`laptop $ export ROS_MASTER_URI=http://192.168.1.11:11311`
 
-### shell B
-`$ cd GUI_navigation/catkin_ws`
+`laptop $ export ROS_IP=192.168.1.101`
 
-`$ catkin_make`
-
-`$ source devel/setup.bash`
-
-`$ roslaunch ncsist_gui start_ui.launch`
+`laptop $ rviz`
