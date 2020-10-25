@@ -87,7 +87,7 @@ void MainWindow::on_pushButton_left_pressed()
   vel_msg.linear.z=0;
   vel_msg.angular.x = 0;
   vel_msg.angular.y = 0;
-  vel_msg.angular.z = 0.1;
+  vel_msg.angular.z = 0.2;
   h2_cmd_vel.publish(vel_msg);
 }
 
@@ -97,7 +97,7 @@ void MainWindow::on_pushButton_up_pressed()
   ui->listWidget_2->addItem("up\n");
 
   geometry_msgs::Twist vel_msg;
-  vel_msg.linear.x=0.05;
+  vel_msg.linear.x=0.1;
   vel_msg.linear.y=0;
   vel_msg.linear.z=0;
   vel_msg.angular.x = 0;
@@ -117,7 +117,7 @@ void MainWindow::on_pushButton_right_pressed()
   vel_msg.linear.z=0;
   vel_msg.angular.x = 0;
   vel_msg.angular.y = 0;
-  vel_msg.angular.z = -0.1;
+  vel_msg.angular.z = -0.2;
   h2_cmd_vel.publish(vel_msg);
 }
 
@@ -127,7 +127,7 @@ void MainWindow::on_pushButton_down_pressed()
   ui->listWidget_2->addItem("down\n");
 
   geometry_msgs::Twist vel_msg;
-  vel_msg.linear.x= -0.05;
+  vel_msg.linear.x= -0.1;
   vel_msg.linear.y=0;
   vel_msg.linear.z=0;
   vel_msg.angular.x = 0;
