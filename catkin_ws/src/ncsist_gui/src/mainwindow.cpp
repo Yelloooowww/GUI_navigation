@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
   h2_cmd_vel=nh->advertise<geometry_msgs::Twist>("cmd_vel", 1);
   h3_joy=nh->advertise<sensor_msgs::Joy>("joy_teleop/joy", 1);
   h4_deal_with_goBack=nh->advertise<std_msgs::String>("deal_with_goBack", 1);
+  h5_rotate=nh->advertise<std_msgs::Int32>("rotate_angle", 1);
 
 
   for (int i = 0; i < 6; i++)
@@ -184,4 +185,137 @@ void MainWindow::on_pushButton_clicked()
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_pushButton_01_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_02_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*2;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_03_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*3;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_04_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*4;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_05_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*5;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_06_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*6;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_07_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*7;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_08_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*8;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_09_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*9;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_10_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*10;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_11_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*11;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_12_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*12;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_13_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*13;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_14_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*14;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_15_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*15;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_16_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*16;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_17_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*17;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_18_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*18;
+  h5_rotate.publish(msg);
+}
+
+void MainWindow::on_pushButton_19_clicked()
+{
+  std_msgs::Int32 msg;
+  msg.data = 18*19;
+  h5_rotate.publish(msg);
 }
